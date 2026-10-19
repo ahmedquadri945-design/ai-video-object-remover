@@ -1,0 +1,66 @@
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Data & Large Media Files
+data/
+backend/data/
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.png
+*.jpg
+*.jpeg
+!frontend/demo*.png
+!frontend/demo*.jpg
+
+# Model Weights (downloaded separately)
+ai_engine/weights/
+*.pt
+*.pth
+*.onnx
+*.bin
+*.ckpt
+
+# Temporary & Working Directories
+temp/
+extracted_frames/
+inpainted_frames/
+.pytest_cache/
+
+# IDE & OS Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
