@@ -73,17 +73,19 @@ app.include_router(ws_router)
 app.mount("/media", StaticFiles(directory=str(DATA_DIR)), name="media")
 
 # Serve Frontend Web Application (http://127.0.0.1:8000)
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_INDEX_HTML = ROOT_DIR / "index.html"
+FRONTEND_DIR = ROOT_DIR / "frontend"
 if (FRONTEND_DIR / "dist").exists():
     FRONTEND_DIR = FRONTEND_DIR / "dist"
-
-INDEX_HTML = FRONTEND_DIR / "index.html"
 
 
 @app.get("/")
 async def serve_index():
-    if INDEX_HTML.exists():
-        return FileResponse(str(INDEX_HTML))
+    if ROOT_INDEX_HTML.exists():
+        return FileResponse(str(ROOT_INDEX_HTML))
+    if (FRONTEND_DIR / "index.html").exists():
+        return FileResponse(str(FRONTEND_DIR / "index.html"))
     return {
         "service": "AI Video Object Remover API",
         "status": "online",
@@ -92,10 +94,12 @@ async def serve_index():
     }
 
 
-# Mount frontend static assets (styles.css, app.js, fonts, etc.)
+# Mount frontend static directory for assets (/frontend/styles.css, /frontend/app.js)
 if FRONTEND_DIR.exists():
     logger.info(f"Serving static frontend files from: {FRONTEND_DIR}")
+    app.mount("/frontend", StaticFiles(directory=str(FRONTEND_DIR)), name="frontend_dir")
     app.mount("/", StaticFiles(directory=str(FRONTEND_DIR)), name="frontend_assets")
+
 
 
 @app.get("/api/health")

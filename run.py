@@ -45,7 +45,7 @@ def main():
         host=host,
         port=port,
         reload=True,
-        reload_dirs=[str(BACKEND_DIR), str(ROOT_DIR / "frontend")],
+        reload_dirs=[str(ROOT_DIR), str(BACKEND_DIR), str(ROOT_DIR / "frontend")],
         reload_includes=["*.py", "*.html", "*.css", "*.js"],
         reload_excludes=["*data*", "*uploads*", "*temp*", "*processed*", "*.mp4", "*.jpg", "*.png"],
         log_level="info",
